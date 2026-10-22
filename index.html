@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171915">
+  <meta name="description" content="An intimate dining experience shaped by the seasons. Discover Catherine Royale, modern French cuisine in the heart of the city.">
+  <title>Catherine Royale — A season at the table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #171915;
+      --ink-soft: #20221d;
+      --cream: #f1eee5;
+      --muted: #b6b4a9;
+      --gold: #c8a96d;
+      --gold-light: #ddc899;
+      --line: rgba(241, 238, 229, .19);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+    body { margin: 0; background: var(--ink); color: var(--cream); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { display: block; max-width: 100%; }
+    .eyebrow { color: var(--gold-light); font-size: .67rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+    .serif { font-family: var(--serif); font-weight: 400; }
+    .wrap { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+    .button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 15px; padding: 0 23px; border: 1px solid var(--gold); background: var(--gold); color: var(--ink); font-size: .69rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; transition: background .2s, color .2s, border-color .2s; }
+    .button:hover { border-color: var(--gold-light); background: var(--gold-light); }
+    .button--outline { background: transparent; color: var(--cream); }
+    .button--outline:hover { color: var(--ink); }
+    .arrow { font-size: 1rem; line-height: 1; }
+
+    .header { position: absolute; z-index: 5; top: 0; left: 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,.17); }
+    .nav { display: flex; height: 84px; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-mark { display: grid; width: 37px; height: 37px; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold-light); font-family: var(--serif); font-size: 1rem; }
+    .brand-name { font-family: var(--serif); font-size: .96rem; letter-spacing: .2em; }
+    .brand-caption { display: block; margin-top: 3px; color: var(--gold-light); font-size: .48rem; letter-spacing: .2em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 32px); margin: 0; padding: 0; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.84); font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-booking { min-height: 42px; padding-inline: 16px; }
+    .menu-toggle { display: none; border: 0; background: transparent; color: var(--cream); font-size: 1.4rem; cursor: pointer; }
+
+    .hero { position: relative; display: flex; min-height: 750px; height: min(900px, 100svh); align-items: center; overflow: hidden; background: #24231e url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=88") center 55% / cover no-repeat; }
+    .hero::before { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,17,14,.83) 0%, rgba(15,17,14,.55) 45%, rgba(15,17,14,.14) 100%), linear-gradient(0deg, rgba(15,17,14,.5), transparent 38%); content: ""; }
+    .hero-content { position: relative; z-index: 1; width: min(760px, 70%); padding-top: 72px; }
+    .hero-kicker { display: flex; align-items: center; gap: 15px; }
+    .hero-kicker::before { width: 36px; height: 1px; background: var(--gold); content: ""; }
+    .hero h1 { max-width: 760px; margin: 32px 0 27px; font-family: var(--serif); font-size: clamp(3.8rem, 8vw, 7.4rem); font-weight: 400; letter-spacing: -.055em; line-height: 1.04; }
+    .hero h1 em { color: var(--gold-light); font-weight: 400; }
+    .hero-copy { max-width: 425px; margin: 0 0 42px; color: rgba(255,255,255,.77); font-size: .93rem; line-height: 1.9; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 18px; }
+    .hero-note { position: absolute; right: 0; bottom: 37px; color: rgba(255,255,255,.75); font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
+    .hero-note::before { display: inline-block; width: 1px; height: 42px; margin: 0 auto 12px; background: var(--gold); content: ""; }
+
+    .intro { padding: 128px 0 136px; }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1.12fr; align-items: center; gap: 14%; }
+    .intro-copy { padding: 20px 0; }
+    .intro h2, .section-heading { margin: 22px 0 30px; font-family: var(--serif); font-size: clamp(2.5rem, 4.7vw, 4.4rem); font-weight: 400; letter-spacing: -.04em; line-height: 1.16; }
+    .intro h2 em, .section-heading em { color: var(--gold-light); font-weight: 400; }
+    .body-copy { color: var(--muted); font-size: .9rem; line-height: 2; }
+    .intro-copy .body-copy { margin: 0 0 19px; }
+    .founder-signature { display: grid; gap: 3px; margin-top: 25px; }
+    .founder-signature span:first-child { color: var(--muted); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; }
+    .founder-signature strong { color: var(--gold-light); font-family: var(--serif); font-size: 1.65rem; font-style: italic; font-weight: 400; }
+    .text-link { display: inline-flex; align-items: center; gap: 14px; margin-top: 23px; color: var(--gold-light); font-size: .69rem; letter-spacing: .13em; text-transform: uppercase; }
+    .text-link span { transition: transform .2s; }
+    .text-link:hover span { transform: translateX(5px); }
+    .intro-image { position: relative; padding: 0 0 30px 30px; }
+    .intro-image::before { position: absolute; z-index: -1; inset: 30px 30px 0 0; border: 1px solid rgba(200,169,109,.55); content: ""; }
+    .intro-image img { width: 100%; height: 490px; object-fit: cover; }
+    .image-caption { position: absolute; right: 0; bottom: 0; padding: 13px 16px; background: var(--ink); color: var(--muted); font-family: var(--serif); font-size: .86rem; font-style: italic; }
+
+    .menu-section { padding: 126px 0 132px; background: var(--cream); color: var(--ink); }
+    .menu-section .eyebrow { color: #927344; }
+    .menu-head { display: flex; align-items: end; justify-content: space-between; gap: 35px; margin-bottom: 65px; }
+    .menu-head .section-heading { max-width: 590px; margin-bottom: 0; }
+    .menu-head .section-heading em { color: #927344; }
+    .menu-note { max-width: 280px; margin-bottom: 4px; color: #747166; font-size: .82rem; line-height: 1.75; }
+    .dish-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+    .dish { border-top: 1px solid rgba(23,25,21,.2); }
+    .dish img { width: 100%; height: 290px; margin: 22px 0 22px; object-fit: cover; }
+    .dish-category { display: block; margin-bottom: 12px; color: #927344; font-size: .61rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    .dish-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .dish h3 { margin: 0; font-family: var(--serif); font-size: 1.35rem; font-weight: 400; }
+    .dish-price { color: #927344; font-size: .82rem; }
+    .dish p { max-width: 330px; margin: 13px 0 0; color: #77756b; font-size: .79rem; line-height: 1.9; }
+    .pastry-selection { margin-top: 78px; padding-top: 54px; border-top: 1px solid rgba(23,25,21,.2); }
+    .pastry-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 34px; }
+    .pastry-heading .section-heading { margin: 15px 0 0; font-size: clamp(2rem, 3.4vw, 3rem); }
+    .pastry-heading .section-heading em { color: #927344; }
+    .pastry-note { max-width: 330px; margin: 0 0 4px; color: #747166; font-size: .8rem; line-height: 1.8; }
+    .pastry-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+    .pastry-card { border: 1px solid rgba(23,25,21,.17); background: rgba(255,255,255,.32); }
+    .pastry-card img { width: 100%; height: 215px; object-fit: cover; }
+    .pastry-card-content { padding: 20px; }
+    .pastry-tag { display: block; margin-bottom: 9px; color: #927344; font-size: .59rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    .pastry-card h3 { margin: 0; font-family: var(--serif); font-size: 1.2rem; font-weight: 400; }
+    .pastry-card p { min-height: 3.5em; margin: 9px 0 14px; color: #77756b; font-size: .75rem; line-height: 1.75; }
+    .pastry-price { color: #80633b; font-size: .82rem; }
+    .menu-foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; padding-top: 30px; border-top: 1px solid rgba(23,25,21,.2); color: #77756b; font-size: .73rem; }
+    .menu-foot .text-link { margin: 0; color: #80633b; }
+
+    .beverage-section { padding: 122px 0 130px; background: #e7e3d8; color: var(--ink); }
+    .beverage-section .eyebrow { color: #927344; }
+    .beverage-head { display: flex; align-items: end; justify-content: space-between; gap: 38px; margin-bottom: 56px; }
+    .beverage-head .section-heading { margin-bottom: 0; }
+    .beverage-head .section-heading em { color: #927344; }
+    .beverage-intro { max-width: 350px; margin: 0 0 4px; color: #747166; font-size: .84rem; line-height: 1.8; }
+    .beverage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+    .beverage-card { padding: 34px; border: 1px solid rgba(23,25,21,.18); }
+    .beverage-card h3 { margin: 0 0 25px; color: #80633b; font-size: .67rem; letter-spacing: .17em; text-transform: uppercase; }
+    .beverage-item { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 17px 0; border-top: 1px solid rgba(23,25,21,.14); }
+    .beverage-item img { width: 76px; height: 76px; object-fit: cover; }
+    .beverage-item strong { font-family: var(--serif); font-size: 1.08rem; font-weight: 400; }
+    .beverage-item span { flex: 0 0 auto; color: #80633b; font-size: .8rem; }
+    .beverage-item p { margin: 7px 0 0; color: #747166; font-size: .76rem; line-height: 1.75; }
+    .beverage-foot { margin: 30px 0 0; color: #747166; font-size: .74rem; line-height: 1.8; }
+
+    .experience { position: relative; min-height: 565px; display: flex; align-items: center; overflow: hidden; background: #25221c url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=85") center 55% / cover no-repeat; }
+    .experience::before { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17,19,16,.86), rgba(17,19,16,.62) 50%, rgba(17,19,16,.15)); content: ""; }
+    .experience-content { position: relative; max-width: 620px; padding: 118px 0; }
+    .experience h2 { margin: 24px 0 27px; font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 400; letter-spacing: -.04em; line-height: 1.14; }
+    .experience p { max-width: 455px; margin: 0 0 38px; color: rgba(255,255,255,.77); font-size: .9rem; line-height: 2; }
+
+    .exclusive-section { padding: 122px 0 132px; background: var(--ink-soft); }
+    .exclusive-heading { max-width: 700px; margin-bottom: 56px; }
+    .exclusive-heading .section-heading { margin-bottom: 15px; }
+    .exclusive-heading .section-heading em { color: var(--gold-light); }
+    .exclusive-heading p { max-width: 490px; margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.8; }
+    .exclusive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .exclusive-card { position: relative; display: flex; min-height: 490px; align-items: end; overflow: hidden; background-position: center; background-size: cover; }
+    .exclusive-card::before { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(13,15,13,.94), rgba(13,15,13,.58) 48%, rgba(13,15,13,.08)); content: ""; transition: background .2s; }
+    .exclusive-card--vip { background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85"); }
+    .exclusive-card--lounge { background-image: url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85"); }
+    .exclusive-card-content { position: relative; width: 100%; padding: 38px; }
+    .exclusive-card h3 { margin: 16px 0; font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3.1rem); font-weight: 400; }
+    .exclusive-card p { max-width: 440px; margin: 0 0 27px; color: rgba(255,255,255,.79); font-size: .84rem; line-height: 1.9; }
+    .exclusive-perks { display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 0 0 30px; padding: 0; color: var(--gold-light); font-size: .64rem; letter-spacing: .06em; list-style: none; }
+    .exclusive-perks li::before { margin-right: 8px; content: "✦"; }
+    .vip-services { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 34px; }
+    .vip-service { padding: 29px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .vip-service h3 { margin: 0 0 15px; color: var(--gold-light); font-family: var(--serif); font-size: 1.25rem; font-weight: 400; }
+    .vip-service p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.9; }
+    .vip-service .text-link { margin-top: 20px; font-size: .6rem; }
+    .boutique-section { padding: 122px 0 132px; background: var(--cream); color: var(--ink); }
+    .boutique-section .eyebrow { color: #927344; }
+    .boutique-head { display: flex; align-items: end; justify-content: space-between; gap: 38px; margin-bottom: 56px; }
+    .boutique-head .section-heading { margin-bottom: 0; }
+    .boutique-head .section-heading em { color: #927344; }
+    .boutique-intro { max-width: 370px; margin: 0 0 4px; color: #747166; font-size: .84rem; line-height: 1.8; }
+    .boutique-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+    .boutique-card { border: 1px solid rgba(23,25,21,.17); }
+    .boutique-card img { width: 100%; height: 260px; object-fit: cover; }
+    .boutique-card-content { padding: 26px; }
+    .boutique-card h3 { margin: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 400; }
+    .boutique-card p { min-height: 3.4em; margin: 12px 0 19px; color: #747166; font-size: .77rem; line-height: 1.85; }
+    .boutique-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #80633b; font-size: .82rem; }
+    .boutique-meta .text-link { margin: 0; color: #80633b; font-size: .62rem; }
+    .gift-card-panel { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 38px; margin-top: 34px; padding: 38px; background: #ded8c9; }
+    .gift-card-panel h3 { margin: 8px 0; font-family: var(--serif); font-size: 1.8rem; font-weight: 400; }
+    .gift-card-panel p { max-width: 520px; margin: 0; color: #6f6b61; font-size: .8rem; line-height: 1.75; }
+    .gift-denominations { display: flex; flex-wrap: wrap; gap: 10px; justify-content: end; }
+    .gift-denominations span { padding: 10px 14px; border: 1px solid rgba(23,25,21,.23); color: #80633b; font-family: var(--serif); font-size: 1.1rem; }
+    .boutique-foot { margin: 20px 0 0; color: #747166; font-size: .72rem; line-height: 1.7; }
+
+    .reservation { padding: 136px 0; }
+    .reservation-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 13%; }
+    .reservation-copy { padding-top: 15px; }
+    .reservation-copy h2 { margin: 18px 0; font-family: var(--serif); font-size: clamp(2.7rem, 4.7vw, 4.5rem); font-weight: 400; letter-spacing: -.045em; line-height: 1.06; }
+    .reservation-copy h2 em { color: var(--gold-light); font-weight: 400; }
+    .contact-block { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .contact-block p { margin: 7px 0; color: var(--muted); font-size: .82rem; line-height: 1.7; }
+    .contact-block a { color: var(--gold-light); }
+    .reservation-form { display: grid; grid-template-columns: 1fr 1fr; gap: 25px 20px; padding: 38px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .field { display: flex; flex-direction: column; gap: 12px; }
+    .field--wide { grid-column: 1 / -1; }
+    .booking-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .booking-fields.is-hidden { display: none; }
+    .field label { color: var(--muted); font-size: .64rem; letter-spacing: .13em; text-transform: uppercase; }
+    .field input, .field select { width: 100%; min-height: 52px; padding: 0 14px; border: 1px solid rgba(241,238,229,.2); border-radius: 0; outline: none; background: #1c1e19; color: var(--cream); font-size: .8rem; }
+    .field input:focus, .field select:focus { border-color: var(--gold); }
+    .field input::placeholder { color: #77786e; }
+    .field select { color-scheme: dark; }
+    .reservation-form .button { grid-column: 1 / -1; width: 100%; margin-top: 3px; cursor: pointer; }
+    .form-message { grid-column: 1 / -1; min-height: 1.3em; margin: -7px 0 0; color: var(--gold-light); font-size: .77rem; line-height: 1.6; }
+
+    .footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer .brand-name { font-size: .8rem; }
+    .footer p { margin: 0; color: #929187; font-size: .68rem; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { color: #c6c3b8; font-size: .66rem; }
+    .footer-links a:hover { color: var(--gold-light); }
+
+    @media (max-width: 960px) {
+      .wrap { width: min(100% - 44px, 640px); }
+      .nav { height: 72px; }
+      .nav-links { position: absolute; top: 71px; right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 10px 22px 20px; border-bottom: 1px solid var(--line); background: var(--ink); }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links li a { display: block; padding: 14px 0; }
+      .nav-links .nav-booking { display: inline-flex; margin-top: 7px; }
+      .menu-toggle { display: block; }
+      .hero { min-height: 690px; height: 88svh; background-position: 58% center; }
+      .hero-content { width: 90%; }
+      .hero h1 { font-size: clamp(4rem, 13vw, 6.2rem); }
+      .intro { padding: 90px 0; }
+      .intro-grid { grid-template-columns: 1fr; gap: 42px; }
+      .intro-copy { padding: 0; }
+      .intro-image { width: 90%; margin-left: auto; }
+      .intro-image img { height: 390px; }
+      .menu-section { padding: 90px 0; }
+      .menu-head { align-items: start; flex-direction: column; gap: 15px; margin-bottom: 44px; }
+      .dish-grid { grid-template-columns: 1fr 1fr; gap: 38px 24px; }
+      .dish img { height: 245px; }
+      .pastry-selection { margin-top: 62px; padding-top: 42px; }
+      .pastry-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+      .pastry-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .beverage-section { padding: 90px 0; }
+      .beverage-head { align-items: start; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+      .experience { min-height: 500px; background-position: 58% center; }
+      .exclusive-section { padding: 90px 0; }
+      .exclusive-heading { margin-bottom: 44px; }
+      .exclusive-grid { grid-template-columns: 1fr; gap: 28px; }
+      .exclusive-card { min-height: 450px; }
+      .vip-services { grid-template-columns: 1fr 1fr; gap: 22px; }
+      .boutique-section { padding: 90px 0; }
+      .boutique-head { align-items: start; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+      .boutique-grid { grid-template-columns: 1fr 1fr; gap: 22px; }
+      .reservation { padding: 94px 0; }
+      .reservation-grid { grid-template-columns: 1fr; gap: 42px; }
+      .reservation-copy { padding: 0; }
+    }
+    @media (max-width: 520px) {
+      .wrap { width: calc(100% - 38px); }
+      .brand-name { font-size: .85rem; }
+      .hero { min-height: 650px; height: 86svh; }
+      .hero-content { width: 100%; padding-top: 55px; }
+      .hero h1 { font-size: clamp(3.7rem, 17vw, 5.4rem); }
+      .hero-copy { max-width: 340px; font-size: .86rem; }
+      .hero-note { display: none; }
+      .button { min-height: 47px; padding-inline: 17px; font-size: .63rem; }
+      .intro-image { width: 96%; padding-left: 19px; }
+      .intro-image::before { inset: 20px 19px 0 0; }
+      .intro-image img { height: 340px; }
+      .dish-grid { grid-template-columns: 1fr; gap: 40px; }
+      .dish img { height: 280px; }
+      .pastry-grid { grid-template-columns: 1fr; gap: 24px; }
+      .pastry-card img { height: 270px; }
+      .pastry-card-content { padding: 23px; }
+      .beverage-grid { grid-template-columns: 1fr; gap: 20px; }
+      .beverage-card { padding: 26px 22px; }
+      .beverage-item { grid-template-columns: 62px minmax(0, 1fr) auto; gap: 12px; }
+      .beverage-item img { width: 62px; height: 68px; }
+      .boutique-grid { grid-template-columns: 1fr; }
+      .boutique-card img { height: 270px; }
+      .boutique-card-content { padding: 24px; }
+      .gift-card-panel { grid-template-columns: 1fr; padding: 28px 22px; }
+      .booking-fields { grid-template-columns: 1fr; }
+      .gift-denominations { justify-content: start; }
+      .vip-services { grid-template-columns: 1fr; }
+      .vip-services { gap: 18px; }
+      .vip-service { padding: 24px; }
+      .menu-foot { align-items: start; flex-direction: column; }
+      .experience { min-height: 485px; }
+      .exclusive-card { min-height: 430px; }
+      .exclusive-card-content { padding: 29px; }
+      .reservation-form { gap: 22px 16px; padding: 27px 21px; }
+      .field input, .field select { padding-inline: 9px; font-size: .75rem; }
+      .footer-inner { align-items: start; flex-direction: column; }
+      .footer-links { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Catherine Royale home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span><span class="brand-name">CATHERINE ROYALE</span><span class="brand-caption">Maison de cuisine</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#story">Our story</a></li>
+        <li><a href="#menu">The menu</a></li>
+        <li><a href="#beverage-bar">The bar</a></li>
+        <li><a href="#vip">VIP &amp; lounge</a></li>
+        <li><a href="#boutique">Gifts</a></li>
+        <li><a href="#experience">The experience</a></li>
+        <li><a class="button nav-booking" href="#reservations">Reserve a table <span class="arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero-content">
+          <div class="hero-kicker eyebrow">Catherine Royale · Private dining</div>
+          <h1 id="hero-title">A season<br>at the <em>table.</em></h1>
+          <p class="hero-copy">A thoughtful expression of French cuisine, rooted in the seasons and made to be savoured together.</p>
+          <div class="hero-actions">
+            <a class="button" href="#reservations">Join us for dinner <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="button button--outline" href="#menu">Discover the menu</a>
+          </div>
+        </div>
+      </div>
+      <span class="hero-note">An invitation to linger</span>
+    </section>
+
+    <section class="intro wrap" id="story" aria-labelledby="story-title">
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <span class="eyebrow">A little more than dinner</span>
+          <h2 id="story-title">Rooted in place.<br><em>Made with feeling.</em></h2>
+          <p class="body-copy">At Catherine Royale, every detail begins with the season. We work closely with the growers, makers and fishermen just beyond our doorstep, letting exceptional ingredients tell their own stories.</p>
+          <p class="body-copy">The result is a cuisine that feels both familiar and surprising: generous, quietly inventive, and always best shared around a table. This is Catherine’s personal invitation to slow down and savour the moment.</p>
+          <div class="founder-signature"><span>A warm welcome from</span><strong>Catherine</strong></div>
+          <a class="text-link" href="#experience">A place to slow down <span aria-hidden="true">→</span></a>
+        </div>
+        <figure class="intro-image">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=85" alt="Warm, intimate dining room prepared for an evening service" loading="lazy">
+          <figcaption class="image-caption">A warm welcome, always.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu" aria-labelledby="menu-title">
+      <div class="wrap">
+        <div class="menu-head">
+          <div>
+            <span class="eyebrow">From our kitchen</span>
+            <h2 class="section-heading" id="menu-title">The best of <em>this moment.</em></h2>
+          </div>
+          <p class="menu-note">Our menu changes with the market, the weather and the things we can’t wait to cook. Explore a few seasonal favourites, from the first bite to something sweet.</p>
+        </div>
+        <div class="dish-grid">
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=82" alt="A vibrant seasonal dish of fresh vegetables and herbs" loading="lazy">
+            <span class="dish-category">To begin</span>
+            <div class="dish-meta"><h3>Garden at first light</h3><span class="dish-price">€24</span></div>
+            <p>Heirloom tomato, garden herbs, whipped chèvre, warm sourdough.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=82" alt="Fresh handmade pasta with herbs and parmesan" loading="lazy">
+            <span class="dish-category">Main course</span>
+            <div class="dish-meta"><h3>Ravioles du moment</h3><span class="dish-price">€32</span></div>
+            <p>Hand-folded pasta, wild mushrooms, aged Comté, brown butter.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=82" alt="An elegant seasonal dessert with fruit and cream" loading="lazy">
+            <span class="dish-category">A little something sweet</span>
+            <div class="dish-meta"><h3>Late-summer douceur</h3><span class="dish-price">€16</span></div>
+            <p>Stone fruit, vanilla crème légère, toasted almond, verbena.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=82" alt="Seasonal soup finished with herbs and a drizzle of oil" loading="lazy">
+            <span class="dish-category">To begin</span>
+            <div class="dish-meta"><h3>Velouté du marché</h3><span class="dish-price">€18</span></div>
+            <p>Today’s market vegetables, crème fraîche, toasted hazelnut, chives.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=82" alt="Golden roasted fish served with lemon and fresh herbs" loading="lazy">
+            <span class="dish-category">Main course</span>
+            <div class="dish-meta"><h3>Catch of the day</h3><span class="dish-price">€38</span></div>
+            <p>Line-caught fish, Provençal vegetables, lemon beurre blanc.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=82" alt="Tender roast with seasonal vegetables" loading="lazy">
+            <span class="dish-category">Main course</span>
+            <div class="dish-meta"><h3>Confit de canard</h3><span class="dish-price">€36</span></div>
+            <p>Slow-cooked duck leg, pommes sarladaises, bitter-leaf salad.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Fresh burrata with ripe tomatoes and basil" loading="lazy">
+            <span class="dish-category">To begin</span>
+            <div class="dish-meta"><h3>Burrata &amp; heirloom tomato</h3><span class="dish-price">€21</span></div>
+            <p>Apulian burrata, ripe tomatoes, basil oil, toasted country bread.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="A warming bowl of French onion soup topped with herbs" loading="lazy">
+            <span class="dish-category">To begin</span>
+            <div class="dish-meta"><h3>Soupe à l’oignon gratinée</h3><span class="dish-price">€19</span></div>
+            <p>Slow-cooked onions, rich beef broth, toasted sourdough, aged Gruyère.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Grilled steak served with golden potatoes" loading="lazy">
+            <span class="dish-category">Main course</span>
+            <div class="dish-meta"><h3>Steak frites, maison</h3><span class="dish-price">€42</span></div>
+            <p>Grilled beef, crisp pommes frites, green peppercorn butter.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Slow-braised beef served with a rich sauce and vegetables" loading="lazy">
+            <span class="dish-category">Main course</span>
+            <div class="dish-meta"><h3>Bœuf bourguignon</h3><span class="dish-price">€39</span></div>
+            <p>Burgundy-braised beef, pearl onions, glazed carrots, pommes purée.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1534939561126-855b8675edd7?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Golden roast chicken served with fresh herbs" loading="lazy">
+            <span class="dish-category">Main course</span>
+            <div class="dish-meta"><h3>Roast chicken aux herbes</h3><span class="dish-price">€34</span></div>
+            <p>Free-range chicken, thyme jus, seasonal vegetables, Lyonnaise potatoes.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Creamy wild mushroom risotto with parmesan" loading="lazy">
+            <span class="dish-category">Main course · Vegetarian</span>
+            <div class="dish-meta"><h3>Risotto aux champignons</h3><span class="dish-price">€31</span></div>
+            <p>Wild mushrooms, Arborio rice, aged Parmesan, truffle-scented butter.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1470324161839-ce2bb6fa6bc3?auto=format&fit=crop&w=900&q=82" alt="Vanilla crème brûlée with a crisp caramelised sugar top" loading="lazy">
+            <span class="dish-category">A little something sweet</span>
+            <div class="dish-meta"><h3>Vanilla crème brûlée</h3><span class="dish-price">€14</span></div>
+            <p>Madagascar vanilla custard, crisp caramel, shortbread biscuit.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=82" alt="Rich dark chocolate dessert served with cream" loading="lazy">
+            <span class="dish-category">A little something sweet</span>
+            <div class="dish-meta"><h3>Fondant au chocolat</h3><span class="dish-price">€16</span></div>
+            <p>Warm dark chocolate, salted caramel, crème fraîche.</p>
+          </article>
+          <article class="dish">
+            <img src="https://images.unsplash.com/photo-1511911063855-2bf39afa5b2e?auto=format&fit=crop&w=900&q=82" alt="A plate of fresh seasonal vegetables and herbs" loading="lazy">
+            <span class="dish-category">To begin</span>
+            <div class="dish-meta"><h3>Œuf parfait</h3><span class="dish-price">€19</span></div>
+            <p>Farm egg, silky potato mousseline, wild mushrooms, brioche.</p>
+          </article>
+        </div>
+        <div class="pastry-selection" aria-labelledby="pastry-title">
+          <div class="pastry-heading">
+            <div>
+              <span class="eyebrow">From our pastry kitchen · Baked fresh daily</span>
+              <h3 class="section-heading" id="pastry-title">Pâtisserie <em>&amp; pastries.</em></h3>
+            </div>
+            <p class="pastry-note">A little something lovely, made in-house and finished by hand. Ask our team about today’s selection and allergens.</p>
+          </div>
+          <div class="pastry-grid">
+            <article class="pastry-card">
+              <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&amp;fit=crop&amp;w=800&amp;q=82" alt="Golden French pastry with a delicate sugar finish" loading="lazy">
+              <div class="pastry-card-content">
+                <span class="pastry-tag">Pâtisserie · Choux pastry</span>
+                <h3>Paris-Brest</h3>
+                <p>Hazelnut praline, crisp choux, light praline cream.</p>
+                <span class="pastry-price">€15</span>
+              </div>
+            </article>
+            <article class="pastry-card">
+              <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=800&amp;q=82" alt="Layered French pastry with cream and fresh fruit" loading="lazy">
+              <div class="pastry-card-content">
+                <span class="pastry-tag">Pâtisserie · Layered pastry</span>
+                <h3>Mille-feuille</h3>
+                <p>Delicate puff pastry, vanilla crème diplomate, seasonal fruit.</p>
+                <span class="pastry-price">€16</span>
+              </div>
+            </article>
+            <article class="pastry-card">
+              <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&amp;fit=crop&amp;w=800&amp;q=82" alt="Freshly made fruit tart topped with seasonal berries" loading="lazy">
+              <div class="pastry-card-content">
+                <span class="pastry-tag">Pâtisserie · Seasonal fruit</span>
+                <h3>Fruit tartelette</h3>
+                <p>Buttery pâte sucrée, vanilla cream, market-fresh fruit.</p>
+                <span class="pastry-price">€14</span>
+              </div>
+            </article>
+            <article class="pastry-card">
+              <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&amp;fit=crop&amp;w=800&amp;q=82" alt="Colourful French macarons arranged for an elegant sweet treat" loading="lazy">
+              <div class="pastry-card-content">
+                <span class="pastry-tag">Pâtisserie · Maison favourite</span>
+                <h3>Macaron selection</h3>
+                <p>Six delicate shells with seasonal ganache and French fruit.</p>
+                <span class="pastry-price">€18</span>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="menu-foot">
+          <span>Prices in euros. Please tell us about any allergies when booking.</span>
+          <a class="text-link" href="#reservations">Ask about tonight’s menu <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="beverage-section" id="beverage-bar" aria-labelledby="beverage-title">
+      <div class="wrap">
+        <div class="beverage-head">
+          <div>
+            <span class="eyebrow">Something lovely in your glass</span>
+            <h2 class="section-heading" id="beverage-title">The premium <em>beverage bar.</em></h2>
+          </div>
+          <p class="beverage-intro">A considered collection of French wines, celebratory bubbles and house-made drinks, chosen to make the evening feel special.</p>
+        </div>
+        <div class="beverage-grid">
+          <article class="beverage-card">
+            <h3>Champagne &amp; sparkling</h3>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="Champagne cocktail garnished with citrus" width="76" height="76" loading="lazy"><div><strong>Champagne Brut Réserve</strong><p>Elegant citrus, orchard fruit · glass</p></div><span>€22</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="Rosé sparkling wine poured for a celebration" width="76" height="76" loading="lazy"><div><strong>Rosé Champagne</strong><p>Wild strawberry, fine bubbles · glass</p></div><span>€26</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A bottle of French sparkling wine" width="76" height="76" loading="lazy"><div><strong>Crémant de Bourgogne</strong><p>Chardonnay, bright and beautifully dry · glass</p></div><span>€16</span></div>
+          </article>
+          <article class="beverage-card">
+            <h3>Wines by the glass</h3>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="White wine glasses ready for a tasting" width="76" height="76" loading="lazy"><div><strong>Sancerre, Loire Valley</strong><p>Sauvignon Blanc · mineral, fresh</p></div><span>€19</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A glass of white wine served at dinner" width="76" height="76" loading="lazy"><div><strong>Chablis, Burgundy</strong><p>Chardonnay · crisp, delicate</p></div><span>€21</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="Red wine served in a candlelit dining room" width="76" height="76" loading="lazy"><div><strong>Saint-Émilion, Bordeaux</strong><p>Merlot blend · silky, dark fruit</p></div><span>€24</span></div>
+          </article>
+          <article class="beverage-card">
+            <h3>House cocktails</h3>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1536935338788846bb9981813?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A sparkling gin cocktail with a citrus garnish" width="76" height="76" loading="lazy"><div><strong>Royale 75</strong><p>Gin, lemon, elderflower, Champagne</p></div><span>€24</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A martini in a chilled cocktail glass" width="76" height="76" loading="lazy"><div><strong>Fig &amp; thyme martini</strong><p>Vodka, ripe fig, garden thyme</p></div><span>€20</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A rich, dark evening cocktail" width="76" height="76" loading="lazy"><div><strong>Midnight in Paris</strong><p>French whisky, bitters, a hint of walnut</p></div><span>€22</span></div>
+          </article>
+          <article class="beverage-card">
+            <h3>Without alcohol</h3>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A refreshing sparkling botanical drink with citrus" width="76" height="76" loading="lazy"><div><strong>Maison botanical spritz</strong><p>House cordial, sparkling water, garden herbs</p></div><span>€14</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="A berry-coloured non-alcoholic sparkling drink" width="76" height="76" loading="lazy"><div><strong>Verjus &amp; wild berry</strong><p>French verjus, seasonal berries, soda</p></div><span>€13</span></div>
+            <div class="beverage-item"><img src="https://images.unsplash.com/photo-1530968464167-7a1861cbaf9f?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80" alt="Fresh water served in a clear glass" width="76" height="76" loading="lazy"><div><strong>Still or sparkling water</strong><p>House filtered water</p></div><span>€7</span></div>
+          </article>
+        </div>
+        <p class="beverage-foot">All prices in euros. Our wine selection changes with the season; please ask our team about bottle pairings and vintages.</p>
+      </div>
+    </section>
+
+    <section class="experience" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="experience-content">
+          <span class="eyebrow">Come as you are</span>
+          <h2 id="experience-title">An evening,<br><em>well spent.</em></h2>
+          <p>Low light, a favourite bottle opened, one more course than you planned. Whether it’s a celebration or simply a Tuesday, there’s always room at our table.</p>
+          <a class="button button--outline" href="#reservations">Make an evening of it <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="exclusive-section" id="vip" aria-labelledby="vip-title">
+      <div class="wrap">
+        <div class="exclusive-heading">
+          <span class="eyebrow">A more personal kind of evening</span>
+          <h2 class="section-heading" id="vip-title">The art of being<br><em>well looked after.</em></h2>
+          <p>For celebrations, important conversations and evenings you want to make your own, discover a more intimate side of Catherine Royale.</p>
+        </div>
+        <div class="exclusive-grid">
+          <article class="exclusive-card exclusive-card--vip">
+            <div class="exclusive-card-content">
+              <span class="eyebrow">The Catherine Royale experience</span>
+              <h3>VIP dining</h3>
+              <p>A more personal evening, with a welcome aperitif, a chef-curated seasonal tasting menu and thoughtful wine-pairing recommendations.</p>
+              <ul class="exclusive-perks">
+                <li>Personalised tasting menu</li>
+                <li>Exclusive members’ lounge</li>
+                <li>Dedicated personal service</li>
+                <li>Sommelier recommendations</li>
+              </ul>
+              <a class="button" href="#reservations" data-experience="vip">Enquire about VIP dining <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="exclusive-card exclusive-card--lounge" id="private-lounge">
+            <div class="exclusive-card-content">
+              <span class="eyebrow">Your own room at the table</span>
+              <h3>The private lounge</h3>
+              <p>A tucked-away setting for a special gathering, with attentive service, a tailored menu and space to settle in together.</p>
+              <ul class="exclusive-perks">
+                <li>Private, intimate setting</li>
+                <li>Menus tailored to your gathering</li>
+                <li>Ideal for celebrations and dinners</li>
+              </ul>
+              <a class="button button--outline" href="#reservations" data-experience="lounge">Enquire about the lounge <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        </div>
+        <div class="vip-services" aria-label="Private guest services">
+          <article class="vip-service">
+            <h3>Private dining suites</h3>
+            <p>Host an intimate celebration or important dinner in a beautifully appointed private room, with a tailored seasonal menu and attentive service.</p>
+            <a class="text-link" href="#reservations" data-experience="suite" data-gift="Private dining suite">Enquire about a suite <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="vip-service">
+            <h3>Executive meeting rooms</h3>
+            <p>Bring people together in a discreet, refined setting with flexible dining, refreshments and personal support for your meeting.</p>
+            <a class="text-link" href="#reservations" data-experience="meeting" data-gift="Executive meeting room">Enquire about a meeting <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="vip-service">
+            <h3>Guest privacy</h3>
+            <p>For celebrity and high-profile guests, our team can discuss discreet arrivals, private spaces and a dedicated point of contact.</p>
+            <a class="text-link" href="#reservations" data-experience="privacy" data-gift="Discreet guest arrangements">Discuss arrangements <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="vip-service">
+            <h3>Personal service</h3>
+            <p>A dedicated host can help coordinate menus, timing, thoughtful touches and the details of your visit.</p>
+            <a class="text-link" href="#reservations" data-experience="vip" data-gift="Dedicated personal service">Request a personal host <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="boutique-section" id="boutique" aria-labelledby="boutique-title">
+      <div class="wrap">
+        <div class="boutique-head">
+          <div>
+            <span class="eyebrow">A little piece of Catherine Royale</span>
+            <h2 class="section-heading" id="boutique-title">The luxury <em>boutique.</em></h2>
+          </div>
+          <p class="boutique-intro">Thoughtful gifts for memorable evenings, gracious hosts and people who deserve something lovely. Each piece is available by enquiry.</p>
+        </div>
+        <div class="boutique-grid">
+          <article class="boutique-card">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=82" alt="A bottle of French wine ready to be gifted" loading="lazy">
+            <div class="boutique-card-content">
+              <h3>Sommelier’s French selection</h3>
+              <p>A gift-ready bottle selected by our sommelier, with a tasting card and a handwritten note.</p>
+              <div class="boutique-meta"><span>From €68</span><a class="text-link" href="#reservations" data-experience="gift" data-gift="Sommelier’s French selection">Enquire <span aria-hidden="true">→</span></a></div>
+            </div>
+          </article>
+          <article class="boutique-card">
+            <img src="https://images.unsplash.com/photo-1603190287605-e6ade32fa852?auto=format&fit=crop&w=900&q=82" alt="A curated arrangement of gourmet delicacies" loading="lazy">
+            <div class="boutique-card-content">
+              <h3>Maison gourmet box</h3>
+              <p>A beautifully presented selection of house-made preserves, chocolates and seasonal treats.</p>
+              <div class="boutique-meta"><span>€95</span><a class="text-link" href="#reservations" data-experience="gift" data-gift="Maison gourmet box">Enquire <span aria-hidden="true">→</span></a></div>
+            </div>
+          </article>
+          <article class="boutique-card">
+            <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=900&q=82" alt="An elegant wrapped gift with ribbon" loading="lazy">
+            <div class="boutique-card-content">
+              <h3>The host’s candle</h3>
+              <p>A softly scented, hand-poured candle inspired by warm evenings at Catherine Royale.</p>
+              <div class="boutique-meta"><span>€58</span><a class="text-link" href="#reservations" data-experience="gift" data-gift="The host’s candle">Enquire <span aria-hidden="true">→</span></a></div>
+            </div>
+          </article>
+        </div>
+        <div class="gift-card-panel">
+          <div>
+            <span class="eyebrow">An evening, gifted</span>
+            <h3>Catherine Royale gift cards</h3>
+            <p>Give someone a seat at our table. Gift cards can be personalised with your message and prepared for collection or delivery by arrangement.</p>
+          </div>
+          <div class="gift-denominations" aria-label="Gift card values">
+            <span>€100</span><span>€200</span><span>€350</span><span>Custom</span>
+            <a class="button" href="#reservations" data-experience="gift" data-gift="Catherine Royale gift card">Enquire about a gift card <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <p class="boutique-foot">Gift enquiries can include gift wrapping, a personal message, collection or delivery arrangements. Prices and availability are confirmed by our team. This boutique is enquiry-only; online checkout is not available.</p>
+      </div>
+    </section>
+
+    <section class="reservation wrap" id="reservations" aria-labelledby="reservation-title">
+      <div class="reservation-grid">
+        <div class="reservation-copy">
+          <span class="eyebrow">Your table is waiting</span>
+          <h2 id="reservation-title">Let’s make<br><em>a night of it.</em></h2>
+          <p class="body-copy">For evenings worth remembering or a thoughtful gift to share, tell us what you have in mind. We’ll be in touch to discuss your request.</p>
+          <div class="contact-block">
+            <span class="eyebrow">Prefer a conversation?</span>
+            <p>Call us at <a href="tel:+2349160547848">+234 916 054 7848</a></p>
+            <p>Email us at <a href="mailto:hycinthcatherin047@gmail.com">hycinthcatherin047@gmail.com</a></p>
+            <p>Contact line · Monday–Saturday, 24 hours</p>
+          </div>
+        </div>
+        <form class="reservation-form" id="reservation-form">
+          <div class="field field--wide"><label for="request-type">How can we help?</label><select id="request-type" name="requestType" required><option value="reservation">Restaurant reservation</option><option value="vip">VIP dining</option><option value="lounge">Private lounge</option><option value="suite">Private dining suite</option><option value="meeting">Executive meeting room</option><option value="privacy">Discreet guest arrangements</option><option value="gift">Luxury gifts or gift cards</option></select></div>
+          <div class="field"><label for="guest-name">Your name</label><input id="guest-name" name="name" autocomplete="name" placeholder="Alex Morgan" required></div>
+          <div class="field"><label for="guest-email">Email address</label><input id="guest-email" name="email" type="email" autocomplete="email" placeholder="alex@example.com" required></div>
+          <div class="booking-fields field--wide" id="booking-fields">
+            <div class="field"><label for="visit-date">Date</label><input id="visit-date" name="date" type="date" required></div>
+            <div class="field"><label for="visit-time">Time</label><select id="visit-time" name="time" required><option value="" disabled selected>Select a time</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option></select></div>
+            <div class="field"><label for="party-size">Number of guests</label><select id="party-size" name="guests" required><option value="2">2 guests</option><option value="1">1 guest</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6 guests</option></select></div>
+          </div>
+          <div class="field field--wide"><label for="request-details">A few details <span>(optional)</span></label><input id="request-details" name="details" placeholder="For gifts: item, wrapping, personal message or delivery preferences"></div>
+          <button class="button" type="submit">Request a reservation <span class="arrow" aria-hidden="true">↗</span></button>
+          <p class="form-message" id="form-message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner wrap">
+      <a class="brand" href="#home" aria-label="Catherine Royale home"><span class="brand-mark" aria-hidden="true">C</span><span><span class="brand-name">CATHERINE ROYALE</span><span class="brand-caption">Maison de cuisine</span></span></a>
+      <p>Enquiries · Monday–Saturday, 24 hours</p>
+      <div class="footer-links"><a href="#reservations">Reservations</a><a href="tel:+2349160547848">Call us</a><a href="mailto:hycinthcatherin047@gmail.com">Email us</a><a href="#home">Back to top ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("#nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+      menuToggle.textContent = isOpen ? "☰" : "×";
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        menuToggle.textContent = "☰";
+      }
+    });
+
+    document.querySelectorAll("[data-experience]").forEach((link) => {
+      link.addEventListener("click", () => {
+        const requestType = link.dataset.experience;
+        document.querySelector("#request-type").value = requestType;
+        updateBookingFields();
+        if (link.dataset.gift) {
+          document.querySelector("#request-details").value = link.dataset.gift;
+        }
+      });
+    });
+
+    const requestTypeInput = document.querySelector("#request-type");
+    const bookingFields = document.querySelector("#booking-fields");
+    const updateBookingFields = () => {
+      const isGiftEnquiry = requestTypeInput.value === "gift";
+      bookingFields.classList.toggle("is-hidden", isGiftEnquiry);
+      bookingFields.querySelectorAll("input, select").forEach((field) => {
+        field.required = !isGiftEnquiry;
+      });
+    };
+    requestTypeInput.addEventListener("change", updateBookingFields);
+    updateBookingFields();
+
+    const dateInput = document.querySelector("#visit-date");
+    const localDateString = () => {
+      const date = new Date();
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      return date.toISOString().slice(0, 10);
+    };
+    dateInput.min = localDateString();
+
+    document.querySelector("#reservation-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      const formData = new FormData(form);
+      const message = document.querySelector("#form-message");
+      const requestLabels = { reservation: "a restaurant reservation", vip: "VIP dining", lounge: "the private lounge", suite: "a private dining suite", meeting: "an executive meeting room", privacy: "discreet guest arrangements", gift: "a luxury gift enquiry" };
+      const requestType = formData.get("requestType");
+      const details = formData.get("details").trim();
+      const requestDetails = details ? ` Details: ${details}.` : "";
+      const reservationDetails = requestType !== "gift"
+        ? ` For ${formData.get("guests")} guests on ${formData.get("date")} at ${formData.get("time")}.`
+        : "";
+      message.textContent = `Thank you, ${formData.get("name")}. We’ve noted your request for ${requestLabels[requestType]}.${reservationDetails}${requestDetails} Please call us to confirm the details.`;
+      form.reset();
+      updateBookingFields();
+      dateInput.min = localDateString();
+    });
+  </script>
+</body>
+</html>
