@@ -691,8 +691,15 @@
       <div class="footer-links"><a href="#reservations">Reservations</a><a href="tel:+2349160547848">Call us</a><a href="mailto:hycinthcatherine457@gmail.com">Email us</a><a href="#home">Back to top ↑</a></div>
     </div>
   </footer>
-
+  
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
   <script>
+
+emailjs.init({
+  publicKey: "b8oVmyym20qbAmwjv"
+});
+
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector("#nav-links");
 
@@ -744,24 +751,64 @@
     };
     dateInput.min = localDateString();
 
-    document.querySelector("#reservation-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const form = event.currentTarget;
-      if (!form.reportValidity()) return;
-      const formData = new FormData(form);
-      const message = document.querySelector("#form-message");
-      const requestLabels = { reservation: "a restaurant reservation", vip: "VIP dining", lounge: "the private lounge", suite: "a private dining suite", meeting: "an executive meeting room", privacy: "discreet guest arrangements", gift: "a luxury gift enquiry" };
-      const requestType = formData.get("requestType");
-      const details = formData.get("details").trim();
-      const requestDetails = details ? ` Details: ${details}.` : "";
-      const reservationDetails = requestType !== "gift"
-        ? ` For ${formData.get("guests")} guests on ${formData.get("date")} at ${formData.get("time")}.`
-        : "";
-      message.textContent = `Thank you, ${formData.get("name")}. We’ve noted your request for ${requestLabels[requestType]}.${reservationDetails}${requestDetails} Please call us to confirm the details.`;
-      form.reset();
-      updateBookingFields();
-      dateInput.min = localDateString();
-    });
+    
+document.querySelector("#reservation-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  if (!form.reportValidity()) return;
+
+  const formData = new FormData(form);
+  const message = document.querySelector("#form-message");
+
+  const requestLabels = {
+    reservation: "a restaurant reservation",
+    vip: "VIP dining",
+    lounge: "the private lounge",
+    suite: "a private dining suite",
+    meeting: "an executive meeting room",
+    privacy: "discreet guest arrangements",
+    gift: "a luxury gift enquiry"
+  };
+
+  const requestType = formData.get("requestType");
+  const details = (formData.get("details") || "").trim();
+  const name = formData.get("name");
+  const requestLabel = requestLabels[requestType] || requestType;
+
+  const reservationDetails = requestType !== "gift"
+    ? ` For ${formData.get("guests")} guests on ${formData.get("date")} at ${formData.get("time")}.`
+    : "";
+
+  message.textContent = "Sending your request...";
+
+  try {
+    await emailjs.send(
+      "service_pvv4j8a",
+      "template_7qrapa7",
+      {
+        name: name,
+        email: formData.get("email"),
+        request_type: requestLabel,
+        guests: formData.get("guests") || "",
+        date: formData.get("date") || "",
+        time: formData.get("time") || "",
+        details: details,
+        message: `${requestLabel}.${reservationDetails}${details ? ` Details: ${details}.` : ""}`
+      }
+    );
+
+    message.textContent = `Thank you, ${name}. Your request has been sent successfully. We will contact you to confirm the details.`;
+    form.reset();
+    updateBookingFields();
+    dateInput.min = localDateString();
+
+  } catch (error) {
+    console.error("EmailJS error:", error);
+    message.textContent = "Your request could not be sent. Please try again or contact us directly.";
+  }
+});
+
   </script>
 </body>
 </html>
