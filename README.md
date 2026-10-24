@@ -1,4 +1,4 @@
-Catherine Royale
+![Catherine Royale](restaurant-cover-branded.jpg)
 
 Welcome to Catherine Royale, a restaurant website designed to showcase the brand and make it easier for customers to explore the restaurant and make reservations.
 
