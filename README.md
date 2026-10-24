@@ -25,11 +25,14 @@ Technologies Used
 * CSS
 * JavaScript
 * EmailJS for reservation form email integration
-
+  
 Project
+
+Catherine Royale — Restaurant Website
 
 This project is hosted using GitHub Pages.
 
 Author
 
-Catherine Royale
+Jennifer Signature Couture
+
